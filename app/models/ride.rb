@@ -9,9 +9,9 @@ class Ride < ActiveRecord::Base
         #Update ticket number
         self.user.update(:tickets => self.attraction.tickets)
         #Update nausea
-        self.user.update(:nausea => self.attraction.nausea_rating)
+        self.user.update(:nausea => self.attraction.nausea_rating + self.user.nausea)
         #Update happiness
-        self.user.update(:happiness => self.attraction.happiness_rating)
+        self.user.update(:happiness => self.attraction.happiness_rating + self.user.happiness)
 
         #Check whether user has enough tickets and is tall enough for ride
         if self.user.tickets < self.attraction.tickets
