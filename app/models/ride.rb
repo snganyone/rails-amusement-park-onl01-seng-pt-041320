@@ -5,6 +5,15 @@ class Ride < ActiveRecord::Base
 
     def take_ride
 
+        #Check whether user has enough tickets and is tall enough for ride
+        if self.user.tickets < self.attraction.tickets && self.user.height < self.attraction.min_height
+            return "Sorry. You do not have enough tickets to ride the #{attraction.name}. You are not tall enough to ride the #{attraction.name}."
+        elsif self.user.height < self.attraction.min_height
+            return "Sorry. You are not tall enough to ride the #{self.attraction.name}."
+        elsif self.user.tickets < self.attraction.tickets
+           return "Sorry. You do not have enough tickets to ride the #{self.attraction.name}."
+        end
+
         #Update ticket number
         self.user.update(:tickets => self.attraction.tickets)
         #Update nausea
@@ -12,13 +21,5 @@ class Ride < ActiveRecord::Base
         #Update happiness
         self.user.update(:happiness => self.attraction.happiness_rating + self.user.happiness)
         
-        #Check whether user has enough tickets and is tall enough for ride
-        if self.user.tickets <= self.attraction.tickets
-            return "Sorry. You do not have enough tickets to ride the #{self.attraction.name}."
-        elsif self.user.height <= self.attraction.min_height
-            return "Sorry. You are not tall enough to ride the #{self.attraction.name}."
-        else
-            return "Sorry. You do not have enough tickets to ride the #{attraction.name}. You are not tall enough to ride the #{attraction.name}."
-        end
     end
 end 
