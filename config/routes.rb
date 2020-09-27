@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   post '/users/new' => 'users#create'
   get '/signin' => 'sessions#new'
+  post '/signin' => 'sessions#create'
 
   resources :users, only: [:new, :create, :show, :edit, :update]
   resources :rides, only: [:new, :create, :show, :edit, :update]
