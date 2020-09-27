@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root 'application#home'
 
   post '/users/new' => 'users#create'
+  get '/signin' => 'sessions#new'
 
   resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :rides, only: [:new, :create, :show, :edit, :update]
+  resources :attractions, only: [:new, :create, :show, :edit, :update]
 end
