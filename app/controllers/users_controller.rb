@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	#before_action :require_login
+
 	def new
 		@user = User.new
 	end
@@ -21,4 +23,9 @@ class UsersController < ApplicationController
 	def user_params
 		params.require(:user).permit(:admin, :name, :password, :nausea, :happiness, :tickets, :height)
 	end
+
+	def require_login
+		redirect_to '/' unless session.include? :name
+	end
+
 end
