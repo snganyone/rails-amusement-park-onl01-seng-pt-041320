@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'application#home'
 
   post '/users/new' => 'users#create'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
 
