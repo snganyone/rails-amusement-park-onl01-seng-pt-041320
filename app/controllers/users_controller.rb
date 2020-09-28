@@ -17,7 +17,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		require_login
 		@user = User.find(params[:id])
+		session[:user_id] = @user.id
 	end
 
 	def user_params
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
 	end
 
 	def require_login
-		redirect_to '/' unless session.include? :name
+		redirect_to '/' unless session.include? :user_id
 	end
 
 end
